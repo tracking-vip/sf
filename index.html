@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SF-Express - Track Your Shipment</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="tracking-page">
+    <header class="tracking-banner">
+        <div class="single-line-brand">
+            <h1 class="brand-title">SF-Express</h1>
+        </div>
+        <p class="tagline">Reliable Global Logistics Solutions</p>
+    </header>
+
+    <div class="main-wrapper">
+        <main class="tracking-card">
+            <div class="card-header-title">
+                <h2><i class="fas fa-search-location"></i> Track Your Shipment</h2>
+            </div>
+            
+            <div class="card-body">
+                <form id="trackingForm" onsubmit="return false;">
+                    <div class="input-group">
+                        <label for="trackingNumber"><i class="fas fa-barcode"></i> Tracking Number</label>
+                        <div class="search-input-wrapper">
+                            <input type="text" id="trackingNumber" class="glass-input" placeholder="Enter tracking number (e.g., SF0123456789012)" required>
+                            <button type="button" id="trackButton" class="track-btn">
+                                <i class="fas fa-search"></i> Track
+                            </button>
+                        </div>
+                        <span class="input-help">Format: SF followed by 13 digits</span>
+                    </div>
+
+                    <div class="error-message" id="errorMessage" style="display: none;"></div>
+                </form>
+
+                <div id="resultSection" class="result-section" style="display: none;">
+                    <div class="result-header-row">
+                        <div class="tracking-number-wrap">
+                            <i class="fas fa-hashtag icon-blue"></i>
+                            <span class="header-label">Tracking Number:</span>
+                            <span id="displayTrackingNumber" class="tracking-no-val"></span>
+                        </div>
+                        <div class="status-wrap">
+                            <span class="header-label">Status:</span>
+                            <span id="displayStatus" class="status-badge">In Transit</span>
+                        </div>
+                    </div>
+
+                    <div class="details-form-container">
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-paper-plane"></i> Origin</span>
+                            <span id="displayOrigin" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-location-dot"></i> Destination</span>
+                            <span id="displayDestination" class="detail-value"></span>
+                        </div>
+                        
+                        <!-- Sender Details -->
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-user"></i> Sender</span>
+                            <span id="displaySenderName" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-map-marker-alt"></i> Sender Address</span>
+                            <span id="displaySenderAddress" class="detail-value"></span>
+                        </div>
+
+                        <!-- Receiver Details -->
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-user-check"></i> Receiver</span>
+                            <span id="displayReceiverName" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-envelope"></i> Receiver Email</span>
+                            <span id="displayReceiverEmail" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-phone-alt"></i> Receiver Phone</span>
+                            <span id="displayReceiverPhone" class="detail-value"></span>
+                        </div>
+                        <div class="form-line-item">
+                            <span class="detail-label"><i class="fas fa-map-marked-alt"></i> Delivery Address</span>
+                            <span id="displayReceiverAddress" class="detail-value"></span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="timeline-header">
+                            <i class="fas fa-clock-rotate-left"></i>
+                            <h4>Tracking History Progress</h4>
+                        </div>
+                        <div id="trackingTimeline" class="timeline"></div>
+                    </div>
+
+                    <button type="button" id="newSearchButton" class="btn btn-secondary full-width btn-search-again">
+                        <i class="fas fa-arrow-left"></i> Search Another Shipment
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p>© 2026 SF-Express. All rights reserved.</p>
+        <p>For shipment booking, please contact our customer service.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
